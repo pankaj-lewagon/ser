@@ -3,11 +3,13 @@ pip>=9
 setuptools>=26
 twine
 wheel>=0.29
+soundfile
 
 # data science
 numpy
 pandas
 scikit-learn
+librosa
 
 # tests/linter
 black
