@@ -1,6 +1,6 @@
 import os, glob
 import numpy as np
-from extract_feature import extract_feature
+from ser.extract_feature import extract_feature
 from params import path_to_data, data_files
 
 
@@ -18,7 +18,7 @@ emotions = {
 
 
 #DataFlair - Load the data and extract features for each sound file
-def load_data(path_to_data, data_files = 'Actor_*/*.wav', test_size=0.2):
+def load_data(path_to_data, data_files = 'Actor_*/*.wav'):
     filenames = path_to_data + data_files
     x, y = [], []
     for file in glob.glob(filenames):
@@ -27,11 +27,11 @@ def load_data(path_to_data, data_files = 'Actor_*/*.wav', test_size=0.2):
         feature = extract_feature(file, mfcc=True, chroma=True, mel=True)
         x.append(feature)
         y.append(emotion)
-    return x, y  #train_test_split(np.array(x), y, test_size=test_size, random_state=9)
+    return x, y
 
 
 if __name__ == '__main__':
-    path_to_data = '../raw_data/ravdess_data/'
+    path_to_data = 'raw_data/ravdess_data/'
     x, y = load_data(path_to_data)
     print(len(y))
     print(np.array(x).shape)
