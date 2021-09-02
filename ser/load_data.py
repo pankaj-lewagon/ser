@@ -1,7 +1,7 @@
 import os, glob
 import numpy as np
 from ser.extract_feature import extract_feature
-from params import path_to_data, data_files
+from ser.params import path_to_data, data_files
 
 
 #DataFlair - Emotions in the RAVDESS dataset
