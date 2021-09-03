@@ -12,10 +12,6 @@ BUCKET_NAME = 'XXX'
 
 ##### Data  - - - - - - - - - - - - - - - - - - - - - - - -
 
-# train data file location
-
-path_to_data = 'raw_data/ravdess_data/'
-data_files = 'Actor_*/*.wav'
 
 # model folder name (will contain the folders for all trained model versions)
 MODEL_NAME = 'XXX'
