@@ -67,11 +67,45 @@ def load_data(path_to_data,
     return x, y
 
 
+emotion_labels = ['angry', 'disgust', 'Fear', 'happy', 'neutral', 'Sad']
+
+
+#Load the data and extract features for each sound file from the TESS data
+def load_data_TESS(path_to_data,
+                   emotion_labels=['angry', 'disgust', 'Fear', 'happy', 'neutral', 'Sad'],
+                   mfcc=True,
+                   chroma=False,
+                   mel=True,
+                   temp=True):
+    x_tess, y_tess = [], []
+    for emotion_label in emotion_labels:
+        for file in glob.glob(path_to_data + f"/*AF_{emotion_label}/*.wav"):
+
+            #conditional to make sure that emotion names match those of the ravdess data
+            if emotion_label == 'Fear':
+                emotion = 'fearful'
+            elif emotion_label == 'neutral':
+                emotion = 'calm'
+            else:
+                emotion = emotion_label.lower()
+
+            feature = extract_features(file,
+                                      mfcc=mfcc,
+                                      chroma=chroma,
+                                      mel=mel,
+                                      temp=temp)
+            x_tess.append(feature)
+            y_tess.append(emotion)
+    return x_tess, y_tess
+
+
 if __name__ == '__main__':
     path_to_data = "/home/iases/code/pankaj-lewagon/ser/raw_data/ravdess_data"
     x, y = load_data(path_to_data,
                      observed_emotions=[
                          'calm', 'happy', 'sad', 'angry', 'fearful', 'disgust'
                      ])
+    # path_to_data = "/home/iases/code/pankaj-lewagon/ser/raw_data/TESS"
+    # x, y = load_data_TESS(path_to_data)
     print(len(y))
     print(np.array(x).shape)
