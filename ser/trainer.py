@@ -15,7 +15,7 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import train_test_split
 from termcolor import colored
-from ser.data import load_data
+from ser.data import load_data, load_data_TESS
 
 
 class Trainer:
@@ -118,19 +118,21 @@ if __name__ == "__main__":
     x, y = load_data(
         "/home/iases/code/pankaj-lewagon/ser/raw_data/ravdess_data",
         observed_emotions=observed_emotions)
-    x_train, x_test, y_train, y_test = train_test_split(np.array(x),
-                                                    y,
-                                                    test_size=0.2,
-                                                    random_state=9)
+    # x, y = load_data_TESS('/home/iases/code/pankaj-lewagon/ser/raw_data/TESS')
+    # x_train, x_test, y_train, y_test = train_test_split(np.array(x),
+    #                                                 y,
+    #                                                 test_size=0.2,
+    #                                                 shuffle=True,
+    #                                                 random_state=9)
 
-    trainer = Trainer(x=x_train, y=y_train)
+    trainer = Trainer(x=x, y=y)
     trainer.base_model()
 
     trainer.run()
-    baseline, acc_score, prec_score = trainer.evaluate(x_test, y_test)
-    print(f"baseline: {baseline}")
-    print(f"model's accuracy score: {acc_score}")
-    print(f"model's precision score: {prec_score}")
+    # baseline, acc_score, prec_score = trainer.evaluate(x_test, y_test)
+    # print(f"baseline: {baseline}")
+    # print(f"model's accuracy score: {acc_score}")
+    # print(f"model's precision score: {prec_score}")
 
     # print(trainer.predict_probs(x_test, y_test, observed_emotions).head())
     # trainer.confidence_report(x_test, y_test, observed_emotions)
