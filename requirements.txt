@@ -12,6 +12,7 @@ scikit-learn
 librosa
 os
 glob
+seaborn
 
 # tests/linter
 black
@@ -31,3 +32,4 @@ six>=1.14
 joblib
 memoized-property
 termcolor
+soundfile
