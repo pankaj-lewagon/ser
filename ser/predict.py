@@ -28,7 +28,6 @@ def predict_proba(observed_emotions, x_pred_preprocessed, model_path='MLP_model.
     emotion_list.sort()
     model_pred_prob = pd.DataFrame((model.predict_proba(x_pred_preprocessed) * 100).round(2),
                                 columns=emotion_list)
-    model_pred_prob.reset_index(drop=True, inplace=True)
     return model_pred_prob
 
 
