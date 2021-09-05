@@ -1,6 +1,6 @@
 import os, glob
 import numpy as np
-from extract_feature import extract_feature
+from ser.extract_feature import extract_feature
 from params import path_to_data, data_files
 
 
