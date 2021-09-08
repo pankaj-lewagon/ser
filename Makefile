@@ -55,10 +55,10 @@ pypi:
 	@twine upload dist/* -u $(PYPI_USERNAME)
 
 run_api:
-				uvicorn api.fast:app --reload  # load web server with code autoreload
+	uvicorn api.fast:app --reload  # load web server with code autoreload
 
 run_locally:
-				@python -m ${PACKAGE_NAME}.${FILENAME}
+	@python -m ${PACKAGE_NAME}.${FILENAME}
 
 ###########    Google configuration set-up
 REGION=europe-west1
@@ -89,21 +89,21 @@ JOB_NAME=ser_training_pipeline_$(shell date +'%Y%m%d_%H%M%S')
 
 
 run_locally:
-					@python -m ${PACKAGE_NAME}.${FILENAME}
+				@python -m ${PACKAGE_NAME}.${FILENAME}
 
 gcp_submit_training:
-					gcloud ai-platform jobs submit training ${JOB_NAME} \
-                --job-dir gs://${BUCKET_NAME}/${BUCKET_TRAINING_FOLDER} \
-                --package-path ${PACKAGE_NAME} \
-                --module-name ${PACKAGE_NAME}.${FILENAME} \
-                --python-version=${PYTHON_VERSION} \
-                --runtime-version=${RUNTIME_VERSION} \
-                --region ${REGION} \
-                --stream-logs
+	gcloud ai-platform jobs submit training ${JOB_NAME} \
+		--job-dir gs://${BUCKET_NAME}/${BUCKET_TRAINING_FOLDER} \
+		--package-path ${PACKAGE_NAME} \
+		--module-name ${PACKAGE_NAME}.${FILENAME} \
+		--python-version=${PYTHON_VERSION} \
+		--runtime-version=${RUNTIME_VERSION} \
+		--region ${REGION} \
+		--stream-logs
 
 gcloud_deploy_image:
-					gcloud run deploy \
-						--image eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME \
-						--platform managed \
-						--region europe-west1 \
-						--set-env-vars "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json"
+	gcloud run deploy \
+		--image eu.gcr.io/${PROJECT_ID}/${DOCKER_IMAGE_NAME} \
+		--platform managed \
+		--region europe-west1 \
+		--set-env-vars "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json"

@@ -5,7 +5,23 @@
 - Type of analysis:
 
 Please document the project the better you can.
+# Enviorment Variables
 
+You need to set up enviroment variables for the makefile and docker deployment to work.
+- In you terminal enviroment
+  - PROJECT_ID - Name of your GCP Project ID
+  - DOCKER_IMAGE_NAME - Name you want to give the image which will found in GCP contain service.
+  - GOOGLE_APPLICATION_CREDENTIALS - You have to make sure you download the json file and and set this variable to where you have it on your enviroment. ALWAYS store in a place which your environment can only access. (e.g ~/.gcpcred)
+- In the Makefile
+  - REGION - GCP region
+  - BUCKET_NAME - Name of bucket to store training data and various files
+
+
+```bash
+export PROJECT_ID=<name of GCP Project Id>
+export DOCKER_IMAGE_NAME=<Name>
+export GOOGLE_APPLICATION_CREDENTIALS=<gcp creditonals file>
+```
 # Startup the project
 
 The initial setup.
@@ -72,3 +88,5 @@ mkdir tmp
 cd tmp
 ser-run
 ```
+# Lastly
+This repo you can use to delploy a docker image and run on GCP only.  There is a addtional git repo which has a front end (Streamlit) https://github.com/Iases22/ser_app if you download and change a "url" varible in the app.py file.
